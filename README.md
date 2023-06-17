@@ -17,6 +17,7 @@ You will need the following things properly installed on your computer.
 * `git clone <repository-url>` this repository
 * `cd file-status-table`
 * `npm install`
+* Installing ember `npm install -g ember-cli`
 
 ## Running / Development
 
