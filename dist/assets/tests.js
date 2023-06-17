@@ -83,12 +83,34 @@ define("file-status-table/tests/integration/components/checkbox-test", ["@ember/
     });
   });
 });
-define("file-status-table/tests/integration/components/download-test", ["@ember/template-factory", "qunit", "file-status-table/tests/helpers", "@ember/test-helpers"], function (_templateFactory, _qunit, _helpers, _testHelpers) {
+define("file-status-table/tests/integration/components/download-test", ["@ember/template-factory", "qunit", "file-status-table/tests/helpers", "@ember/test-helpers", "@ember/service"], function (_templateFactory, _qunit, _helpers, _testHelpers, _service) {
   "use strict";
 
-  0; //eaimeta@70e063a35619d71f0,"qunit",0,"file-status-table/tests/helpers",0,"@ember/test-helpers",0,"ember-cli-htmlbars"eaimeta@70e063a35619d71f
+  0; //eaimeta@70e063a35619d71f0,"qunit",0,"file-status-table/tests/helpers",0,"@ember/test-helpers",0,"ember-cli-htmlbars",0,"@ember/service"eaimeta@70e063a35619d71f
+  function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+  function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+  function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+  class FileSource extends _service.default {
+    constructor() {
+      super(...arguments);
+      _defineProperty(this, "selectedFiles", []);
+      _defineProperty(this, "files", [{}, {}, {}, {}]);
+    }
+    selectedCount() {
+      return this.selectedFiles.length;
+    }
+    filesCount() {
+      return this.files.length;
+    }
+  }
   (0, _qunit.module)('Integration | Component | download', function (hooks) {
     (0, _helpers.setupRenderingTest)(hooks);
+    hooks.beforeEach(function (assert) {
+      this.owner.register('service:file-source', FileSource);
+    });
+    hooks.afterEach(function (assert) {
+      this.owner.unregister('service:file-source');
+    });
     (0, _qunit.test)('it renders', async function (assert) {
       // Set any properties with this.set('myProperty', 'value');
       // Handle any actions with this.set('myAction', function(val) { ... });
@@ -120,14 +142,56 @@ define("file-status-table/tests/integration/components/download-test", ["@ember/
       }));
       assert.dom(this.element).exists();
     });
+    (0, _qunit.test)('should be disabled if no files selected', async function (assert) {
+      await (0, _testHelpers.render)((0, _templateFactory.createTemplateFactory)(
+      /*
+        <Download />
+      */
+      {
+        "id": "j4abUhH5",
+        "block": "[[[8,[39,0],null,null,null]],[],false,[\"download\"]]",
+        "moduleName": "/Users/kinnu/Documents/file-status-table/file-status-table/tests/integration/components/download-test.js",
+        "isStrictMode": false
+      }));
+      const btn = this.element.querySelector('.text-btn');
+      assert.dom(btn).isDisabled();
+    });
   });
 });
-define("file-status-table/tests/integration/components/file-table-test", ["@ember/template-factory", "qunit", "file-status-table/tests/helpers", "@ember/test-helpers"], function (_templateFactory, _qunit, _helpers, _testHelpers) {
+define("file-status-table/tests/integration/components/file-table-test", ["@ember/template-factory", "qunit", "file-status-table/tests/helpers", "@ember/test-helpers", "@ember/service"], function (_templateFactory, _qunit, _helpers, _testHelpers, _service) {
   "use strict";
 
-  0; //eaimeta@70e063a35619d71f0,"qunit",0,"file-status-table/tests/helpers",0,"@ember/test-helpers",0,"ember-cli-htmlbars"eaimeta@70e063a35619d71f
+  0; //eaimeta@70e063a35619d71f0,"qunit",0,"file-status-table/tests/helpers",0,"@ember/test-helpers",0,"ember-cli-htmlbars",0,"@ember/service"eaimeta@70e063a35619d71f
+  function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+  function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+  function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+  class FileSource extends _service.default {
+    constructor() {
+      super(...arguments);
+      _defineProperty(this, "selectedFiles", [{}, {}, {}]);
+      _defineProperty(this, "files", [{}, {}, {}, {}]);
+    }
+    selectedCount() {
+      return this.selectedFiles.length;
+    }
+    filesCount() {
+      return this.files.length;
+    }
+    setFiles(files) {
+      this.files = files;
+    }
+    getFiles() {
+      return this.files;
+    }
+  }
   (0, _qunit.module)('Integration | Component | file-table', function (hooks) {
     (0, _helpers.setupRenderingTest)(hooks);
+    hooks.beforeEach(function (assert) {
+      this.owner.register('service:file-source', FileSource);
+    });
+    hooks.afterEach(function (assert) {
+      this.owner.unregister('service:file-source');
+    });
     (0, _qunit.test)('it renders', async function (assert) {
       // Set any properties with this.set('myProperty', 'value');
       // Handle any actions with this.set('myAction', function(val) { ... });
@@ -144,14 +208,49 @@ define("file-status-table/tests/integration/components/file-table-test", ["@embe
       }));
       assert.dom(this.element).exists();
     });
+    (0, _qunit.test)('should have the table rendered', async function (assert) {
+      await (0, _testHelpers.render)((0, _templateFactory.createTemplateFactory)(
+      /*
+        <FileTable />
+      */
+      {
+        "id": "clO67Izg",
+        "block": "[[[8,[39,0],null,null,null]],[],false,[\"file-table\"]]",
+        "moduleName": "/Users/kinnu/Documents/file-status-table/file-status-table/tests/integration/components/file-table-test.js",
+        "isStrictMode": false
+      }));
+      assert.equal(this.element.querySelectorAll('tbody>tr').length, 5);
+    });
   });
 });
-define("file-status-table/tests/integration/components/header-test", ["@ember/template-factory", "qunit", "file-status-table/tests/helpers", "@ember/test-helpers"], function (_templateFactory, _qunit, _helpers, _testHelpers) {
+define("file-status-table/tests/integration/components/header-test", ["@ember/template-factory", "qunit", "file-status-table/tests/helpers", "@ember/test-helpers", "@ember/service"], function (_templateFactory, _qunit, _helpers, _testHelpers, _service) {
   "use strict";
 
-  0; //eaimeta@70e063a35619d71f0,"qunit",0,"file-status-table/tests/helpers",0,"@ember/test-helpers",0,"ember-cli-htmlbars"eaimeta@70e063a35619d71f
+  0; //eaimeta@70e063a35619d71f0,"qunit",0,"file-status-table/tests/helpers",0,"@ember/test-helpers",0,"ember-cli-htmlbars",0,"@ember/service"eaimeta@70e063a35619d71f
+  function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+  function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+  function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+  class FileSource extends _service.default {
+    constructor() {
+      super(...arguments);
+      _defineProperty(this, "selectedFiles", [{}, {}, {}]);
+      _defineProperty(this, "files", [{}, {}, {}, {}]);
+    }
+    selectedCount() {
+      return this.selectedFiles.length;
+    }
+    filesCount() {
+      return this.files.length;
+    }
+  }
   (0, _qunit.module)('Integration | Component | header', function (hooks) {
     (0, _helpers.setupRenderingTest)(hooks);
+    hooks.beforeEach(function (assert) {
+      this.owner.register('service:file-source', FileSource);
+    });
+    hooks.afterEach(function (assert) {
+      this.owner.unregister('service:file-source');
+    });
     (0, _qunit.test)('it renders', async function (assert) {
       // Set any properties with this.set('myProperty', 'value');
       // Handle any actions with this.set('myAction', function(val) { ... });
@@ -166,7 +265,46 @@ define("file-status-table/tests/integration/components/header-test", ["@ember/te
         "moduleName": "/Users/kinnu/Documents/file-status-table/file-status-table/tests/integration/components/header-test.js",
         "isStrictMode": false
       }));
-      assert.dom(this.element).hasText('Selected: 0 Download Selected');
+      assert.dom(this.element).exists();
+    });
+    (0, _qunit.test)('should have a select all checkbox', async function (assert) {
+      await (0, _testHelpers.render)((0, _templateFactory.createTemplateFactory)(
+      /*
+        <Header />
+      */
+      {
+        "id": "ZoNjLNKp",
+        "block": "[[[8,[39,0],null,null,null]],[],false,[\"header\"]]",
+        "moduleName": "/Users/kinnu/Documents/file-status-table/file-status-table/tests/integration/components/header-test.js",
+        "isStrictMode": false
+      }));
+      assert.dom(this.element.querySelector('.checkbox')).exists();
+    });
+    (0, _qunit.test)('should have download button', async function (assert) {
+      await (0, _testHelpers.render)((0, _templateFactory.createTemplateFactory)(
+      /*
+        <Header />
+      */
+      {
+        "id": "ZoNjLNKp",
+        "block": "[[[8,[39,0],null,null,null]],[],false,[\"header\"]]",
+        "moduleName": "/Users/kinnu/Documents/file-status-table/file-status-table/tests/integration/components/header-test.js",
+        "isStrictMode": false
+      }));
+      assert.dom(this.element.querySelector('.text-btn')).exists();
+    });
+    (0, _qunit.test)('should show count of selected files', async function (assert) {
+      await (0, _testHelpers.render)((0, _templateFactory.createTemplateFactory)(
+      /*
+        <Header />
+      */
+      {
+        "id": "ZoNjLNKp",
+        "block": "[[[8,[39,0],null,null,null]],[],false,[\"header\"]]",
+        "moduleName": "/Users/kinnu/Documents/file-status-table/file-status-table/tests/integration/components/header-test.js",
+        "isStrictMode": false
+      }));
+      assert.dom(this.element).hasText('Selected: 3 Download Selected');
     });
   });
 });

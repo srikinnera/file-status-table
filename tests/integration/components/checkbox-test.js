@@ -21,4 +21,5 @@ module('Integration | Component | checkbox', function (hooks) {
 
     assert.dom(this.element).exists();
   });
+
 });
