@@ -25,6 +25,11 @@ export default class Header extends Component {
     if (this.fileSource.selectedCount() === 0) {
       this.setSelectAllChecked(false);
     }
+    else if(this.fileSource.selectedCount() < this.fileSource.filesCount()){
+      this.setSelectAllChecked(false);
+    }
+    else 
+      this.setSelectAllChecked(true);
     return this.fileSource.selectedCount() === this.fileSource.filesCount();
   }
 
