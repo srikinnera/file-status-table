@@ -1,0 +1,8 @@
+<input
+  id={{@id}}
+  type="checkbox"
+  class="checkbox"
+  checked={{@checked}}
+  {{on "click" (fn this.clicked @handleClick)}}
+  indeterminate={{@indeterminate}}
+/>

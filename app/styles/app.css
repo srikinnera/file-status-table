@@ -1,0 +1,61 @@
+/* Ember supports plain CSS out of the box. More info: https://cli.emberjs.com/release/advanced-use/stylesheets/ */
+
+#table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#table td,
+#table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#table tr:hover {
+  background-color: #ddd;
+}
+
+#table tr.active {
+  background-color: #ccc;
+}
+
+#table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+}
+
+.checkbox {
+  accent-color: #2e8bc0;
+  transform: scale(1.5);
+}
+
+.status {
+  &.available::before {
+    background-color: #0f4504;
+    border-color: #0f4504;
+    border-radius: 7px;
+  }
+
+  &::before {
+    content: " ";
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 10px;
+  }
+}
+
+.text-btn {
+  border: none;
+  background-color: inherit;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.text-btn:hover {
+  background: #eee;
+}

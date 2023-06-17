@@ -1,0 +1,31 @@
+<Header />
+<table id="table">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Device</th>
+      <th>Path</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each this.computedFileData as |file|}}
+      <tr class={{if file.isChecked 'active' 'inactive'}}>
+        <td><Checkbox
+            @id={{@id}}
+            @handleClick={{(fn
+              this.toggleSelection file
+            )}}
+            @checked={{file.isChecked}}
+            indeterminate={{false}}
+          />
+          </td>
+        <td>{{file.name}}</td>
+        <td>{{file.device}}</td>
+        <td>{{file.path}}</td>
+        <td><Status @status={{file.status}} /></td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
