@@ -292,12 +292,16 @@
     @checked={{this.isSelectAllChecked}}
     @handleClick={{this.toggleSelectionAllFiles}}
   />
-  <span>Selected: {{this.selectedFileCount}} </span>
+  {{#if (eq this.selectedFileCount 0) }}
+    <span>None Selected</span>
+  {{else}}
+    <span>Selected: {{this.selectedFileCount}}</span>
+  {{/if}}
   <Download />
   */
   {
-    "id": "9olFC7t6",
-    "block": "[[[8,[39,0],null,[[\"@id\",\"@indeterminate\",\"@checked\",\"@handleClick\"],[\"selectAll\",[30,0,[\"isSelectAllIndeterminate\"]],[30,0,[\"isSelectAllChecked\"]],[30,0,[\"toggleSelectionAllFiles\"]]]],null],[1,\"\\n\"],[10,1],[12],[1,\"Selected: \"],[1,[30,0,[\"selectedFileCount\"]]],[1,\" \"],[13],[1,\"\\n\"],[8,[39,1],null,null,null]],[],false,[\"checkbox\",\"download\"]]",
+    "id": "0HLCHV0z",
+    "block": "[[[8,[39,0],null,[[\"@id\",\"@indeterminate\",\"@checked\",\"@handleClick\"],[\"selectAll\",[30,0,[\"isSelectAllIndeterminate\"]],[30,0,[\"isSelectAllChecked\"]],[30,0,[\"toggleSelectionAllFiles\"]]]],null],[1,\"\\n\"],[41,[28,[37,2],[[30,0,[\"selectedFileCount\"]],0],null],[[[1,\"  \"],[10,1],[12],[1,\"None Selected\"],[13],[1,\"\\n\"]],[]],[[[1,\"  \"],[10,1],[12],[1,\"Selected: \"],[1,[30,0,[\"selectedFileCount\"]]],[13],[1,\"\\n\"]],[]]],[8,[39,3],null,null,null]],[],false,[\"checkbox\",\"if\",\"eq\",\"download\"]]",
     "moduleName": "file-status-table/components/header.hbs",
     "isStrictMode": false
   });

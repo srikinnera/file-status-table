@@ -4,5 +4,9 @@
   @checked={{this.isSelectAllChecked}}
   @handleClick={{this.toggleSelectionAllFiles}}
 />
-<span>Selected: {{this.selectedFileCount}} </span>
+{{#if (eq this.selectedFileCount 0) }}
+  <span>None Selected</span>
+{{else}}
+  <span>Selected: {{this.selectedFileCount}}</span>
+{{/if}}
 <Download />
